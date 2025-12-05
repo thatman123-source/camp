@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camp Yaldei Govoha - CYG Summer Camp</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', cursive, sans-serif;
+            overflow-x: hidden;
+            background: #f5f5f5;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #00a8e8 0%, #007ea7 50%, #003459 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.1)"/></svg>') 
+                       repeat-x bottom;
+            animation: wave 15s linear infinite;
+        }
+
+        @keyframes wave {
+            0%   { background-position-x: 0; }
+            100% { background-position-x: 1200px; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* HERO TITLE */
+        .logo-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .camp-logo {
+            background: white;
+            border-radius: 50%;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            border: 8px solid #ffd700;
+        }
+
+        h1 {
+            font-size: 5em;
+            color: white;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 2em;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+        }
+
+        /* REGISTER BUTTON */
+        .register-btn {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 25px 60px;
+            font-size: 1.8em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,107,53,0.4);
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .register-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(255,107,53,0.6);
+        }
+
+        /* NAV BAR */
+        .nav-section {
+            background: linear-gradient(to right, #00a8e8, #007ea7);
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            background: white;
+            padding: 20px 30px;
+            margin: 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #003459;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-item:hover {
+            transform: translateY(-5px) rotate(2deg);
+            background: #ffd700;
+        }
+
+        /* CONTENT SECTIONS */
+        .content-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 3em;
+            color: #003459;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 5px solid #ffd700;
+            padding-bottom: 20px;
+        }
+
+        .info-box {
+            background: #ffd700;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            font-size: 1.3em;
+            color: #003459;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* DIVISION CARDS */
+        .division-card {
+            background: linear-gradient(135deg, #00a8e8, #007ea7);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .division-card h3 {
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .division-card p {
+            font-size: 1.3em;
+            line-height: 1.8;
+        }
+
+        /* VIDEO + RESOURCE GRIDS */
+        .video-grid, .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .video-card, .resource-card {
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover, .resource-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #00a8e8, #003459);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .resource-icon {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* =============================== */
+        /*      STAFF PROFILE SECTIONS     */
+        /* =============================== */
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .staff-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: 0.3s ease;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .staff-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00a8e8, #007ea7);
+            margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            position: relative;
+        }
+
+        /* Hover animation */
+        .staff-photo:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 25px rgba(0, 168, 232, 0.6);
+        }
+
+        /* Ring animation */
+        .staff-photo::after {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: calc(100% + 12px);
+            height: calc(100% + 12px);
+            border-radius: 50%;
+            border: 3px solid rgba(0, 168, 232, 0);
+            transition: border-color 0.35s ease, transform 0.35s ease;
+        }
+
+        .staff-photo:hover::after {
+            border-color: rgba(0, 168, 232, 0.7);
+            transform: scale(1.05);
+        }
+
+        .staff-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #003459;
+            margin-bottom: 5px;
+        }
+
+        .staff-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #007ea7;
+            margin-bottom: 3px;
+        }
+
+        .staff-yearjob {
+            font-size: 1.1em;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* SMALL CARDS (Division Heads) */
+        .small-staff-card { padding: 20px; }
+
+        .small-staff-card .staff-photo {
+            width: 100px;
+            height: 100px;
+            font-size: 2em;
+        }
+
+        .small-staff-card .staff-name { font-size: 1.4em; }
+        .small-staff-card .staff-title { font-size: 1em; }
+        .small-staff-card .staff-yearjob { font-size: 1em; }
+
+    </style>
+</head>
+<body>
+
+    <!-- ============================= -->
+    <!--          HERO SECTION         -->
+    <!-- ============================= -->
+
+    <div class="hero">
+        <div class="logo-container">
+            <div class="camp-logo">
+                <h1 style="font-size: 2.5em; margin: 0;">CYG</h1>
+            </div>
+
+            <h1>CAMP YALDEI GOVOHA</h1>
+            <div class="subtitle">The Ultimate Summer Experience!</div>
+
+            <a href="#" class="register-btn" onclick="showSection('register')">
+                REGISTER NOW!
+            </a>
+        </div>
+    </div>
+
+
+    <!-- ============================= -->
+    <!--         NAVIGATION BAR        -->
+    <!-- ============================= -->
+
+    <div class="nav-section">
+        <div class="nav-container">
+
+            <div class="nav-item" onclick="showSection('about')">🏕️ About Camp</div>
+            <div class="nav-item" onclick="showSection('staff')">👨‍🏫 Head Staff</div>
+            <div class="nav-item" onclick="showSection('videos')">🎥 Camp Videos</div>
+            <div class="nav-item" onclick="showSection('songs')">🎵 Camp Songs</div>
+            <div class="nav-item" onclick="showSection('resources')">📚 Resources</div>
+            <div class="nav-item" onclick="showSection('register')">✍️ Register</div>
+
+        </div>
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!--          ABOUT SECTION        -->
+    <!-- ============================= -->
+
+    <div id="about" class="content-section active">
+
+        <h2 class="section-title">Welcome to CYG!</h2>
+
+        <div class="info-box">
+            📍 Camp Address: <strong>1500 Pine St</strong>  
+            <br>
+            ✉️ Mailing Address: <strong>152 Coles Way</strong>
+            <br>
+            📞 Phone: <strong>848-226-2996</strong>  
+            •  
+            📧 Email: <strong>campyg18@gmail.com</strong>
+        </div>
+
+        <p style="font-size: 1.3em; line-height: 1.8; color: #003459; text-align: center; margin-bottom: 40px;">
+            Camp Yaldei Govoha offers an unforgettable summer experience filled with exciting activities, 
+            Torah learning, sports, trips, and lifelong friendships — all in a warm yeshivish environment!
+        </p>
+
+        <div class="division-card">
+            <h3>🎯 Grades 2–6 Division</h3>
+            <p>
+                Our main division provides an action-packed summer for boys entering grades 2 through 6. 
+                With sports leagues, swimming, trips, learning programs, and so much more — every day 
+                is an adventure!
+            </p>
+        </div>
+
+        <div class="division-card">
+            <h3>🔥 Bachurei Govoha (Grades 7–8)</h3>
+            <p>
+                Our special division for older boys offers a unique experience tailored to grades 7 and 8. 
+                With more independence, advanced activities, meaningful learning, and amazing trips, 
+                Bachurei Govoha takes summer to the next level!
+            </p>
+        </div>
+
+    </div>
+
+  <!-- ============================= -->
+    <!--        HEAD STAFF SECTION     -->
+    <!-- ============================= -->
+
+    <div id="staff" class="content-section">
+
+        <h2 class="section-title">👨‍🏫 Head Staff</h2>
+
+        <div class="info-box">
+            Camp Address: 1500 Pine St • Mailing Address: 152 Coles Way
+            <br>
+            📞 848-226-2996 • 📧 campyg18@gmail.com
+        </div>
+
+
+        <!-- ===== TOP ROW — MAIN THREE ===== -->
+
+        <h3 style="text-align:center; font-size:2.2em; color:#003459; margin-bottom:30px;">
+            Leadership Team
+        </h3>
+
+        <div class="staff-grid">
+
+            <!-- Rabbi Mechael Beren -->
+            <div class="staff-card">
+                <div class="staff-photo">MB</div>
+                <div class="staff-name">Rabbi Mechael Beren</div>
+                <div class="staff-title">Director</div>
+                <div class="staff-yearjob">(Sgan Menahel, Ohr Avrohom Chaim)</div>
+            </div>
+
+            <!-- Rabbi Shloime Katz -->
+            <div class="staff-card">
+                <div class="staff-photo">SK</div>
+                <div class="staff-name">Rabbi Shloime Katz</div>
+                <div class="staff-title">Learning Director</div>
+                <div class="staff-yearjob">(Rebbi, Cheder Bnei Torah)</div>
+            </div>
+
+            <!-- Rabbi Sruly Friedman -->
+            <div class="staff-card">
+                <div class="staff-photo">SF</div>
+                <div class="staff-name">Rabbi Sruly Friedman</div>
+                <div class="staff-title">Head Counselor</div>
+                <div class="staff-yearjob">(Rebbi, Nesivos HaTorah)</div>
+            </div>
+
+        </div> <!-- end main staff grid -->
+
+
+        <!-- ===== SECOND ROW — DIVISION HEADS ===== -->
+
+        <h3 style="text-align:center; font-size:1.9em; color:#003459; margin-top:50px;">
+            Division Heads
+        </h3>
+
+        <div class="staff-grid">
+
+            <!-- Yitzy Frank -->
+            <div class="staff-card small-staff-card">
+                <div class="staff-photo">YF</div>
+                <div class="staff-name">R' Yitzy Frank</div>
+                <div class="staff-title">Division Head</div>
+            </div>
+
+            <!-- Menachem Schwartz -->
+            <div class="staff-card small-staff-card">
+                <div class="staff-photo">MS</div>
+                <div class="staff-name">R' Menachem Schwartz</div>
+                <div class="staff-title">Division Head</div>
+            </div>
+
+            <!-- Avishai Blaxberg -->
+            <div class="staff-card small-staff-card">
+                <div class="staff-photo">AB</div>
+                <div class="staff-name">R' Avishai Blaxberg</div>
+                <div class="staff-title">Division Head</div>
+            </div>
+
+            <!-- Zevi Strauss -->
+            <div class="staff-card small-staff-card">
+                <div class="staff-photo">ZS</div>
+                <div class="staff-name">R' Zevi Strauss</div>
+                <div class="staff-title">Division Head</div>
+            </div>
+	   <!-- Nosson Tzvi Labinsky -->
+            <div class="staff-card small-staff-card">
+                <div class="staff-photo">NTL</div>
+                <div class="staff-name">R' Nosson Tzvi Labinsky</div>
+                <div class="staff-title">Division Head</div>
+            </div>
+	   <!-- Shalom Menachem Tendler -->
+            <div class="staff-card small-staff-card">
+                <div class="staff-photo">ZS</div>
+                <div class="staff-name">R' Shalom Menachem Tendler</div>
+                <div class="staff-title">Division Head</div>
+            </div>
+
+
+
+        </div> <!-- end division heads grid -->
+
+    </div>
+
+ <!-- ============================= -->
+    <!--        CAMP VIDEOS            -->
+    <!-- ============================= -->
+
+    <div id="videos" class="content-section">
+
+        <h2 class="section-title">🎥 Camp Videos</h2>
+
+        <p style="text-align: center; font-size: 1.3em; color: #003459; margin-bottom: 30px;">
+            Relive the incredible moments from previous summers!
+        </p>
+
+        <div class="video-grid">
+
+            <div class="video-card">
+                <div class="video-thumbnail"▶️</div>
+                <div class="video-title">Summer 2024 Highlights</div>
+                <p>The best moments from an amazing summer!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-title">Trip Day Extravaganza</div>
+                <p>Our incredible trips and adventures!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-title">Color War 2024</div>
+                <p>The most exciting competition of the summer!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-title">Sports League Finals</div>
+                <p>Championship games and amazing plays!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-title">Bachurei Govoha 2024</div>
+                <p>Special moments from our older division!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-title">End of Summer Celebration</div>
+                <p>The grand finale that nobody wanted to end!</p>
+            </div>
+
+        </div>
+     </div>
+
+ <!-- ============================= -->
+    <!--        CAMP SONGS            -->
+    <!-- ============================= -->
+
+    <div id="songs" class="content-section">
+
+        <h2 class="section-title">🎵 Camp Songs</h2>
+
+        <p style="text-align: center; font-size: 1.3em; color: #003459; margin-bottom: 30px;">
+            Download and listen to all your favorite camp songs!
+        </p>
+
+        <div class="video-grid">
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">🎵</div>
+                <div class="video-title">CYG Theme Song</div>
+                <p>Our official camp anthem!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">🎵</div>
+                <div class="video-title">Color War Songs 2024</div>
+                <p>Both team songs and march!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">🎵</div>
+                <div class="video-title">Bunk Songs Collection</div>
+                <p>All the hits from every bunk!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">🎵</div>
+                <div class="video-title">Friday Zmiros</div>
+                <p>Beautiful songs for Shabbos!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">🎵</div>
+                <div class="video-title">Bachurei Govoha Songs</div>
+                <p>Special songs from our older division!</p>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" style="background: linear-gradient(135deg, #ff6b35, #f7931e);">🎵</div>
+                <div class="video-title">Camp Classics</div>
+                <p>The songs that never get old!</p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+  <!-- ============================= -->
+    <!--      RESOURCES SECTION        -->
+    <!-- ============================= -->
+
+    <div id="resources" class="content-section">
+
+        <h2 class="section-title">📚 Newsletters & Yearbooks</h2>
+
+        <p style="text-align: center; font-size: 1.3em; color: #003459; margin-bottom: 30px;">
+            Read through past newsletters and relive memories with our yearbooks!
+        </p>
+
+        <div class="resource-grid">
+
+            <div class="resource-card">
+                <div class="resource-icon">📰</div>
+                <div class="resource-title">Newsletter - Week 1</div>
+                <p>Opening week excitement and updates!</p>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">📰</div>
+                <div class="resource-title">Newsletter - Week 2</div>
+                <p>Trip days and special activities!</p>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">📰</div>
+                <div class="resource-title">Newsletter - Week 3</div>
+                <p>Mid-summer updates and photos!</p>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">📰</div>
+                <div class="resource-title">Newsletter - Week 4</div>
+                <p>Color War and grand finale!</p>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">📖</div>
+                <div class="resource-title">2024 Yearbook</div>
+                <p>Full yearbook with photos and memories!</p>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-icon">📖</div>
+                <div class="resource-title">2023 Yearbook</div>
+                <p>Last year's incredible summer!</p>
+            </div>
+
+        </div>
+    </div>
+
+
+  <!-- ============================= -->
+    <!--     REGISTRATION SECTION      -->
+    <!-- ============================= -->
+
+    <div id="register" class="content-section">
+
+        <h2 class="section-title"✍️ Registration Form</h2>
+
+        <div class="info-box">
+            Don't miss out on Summer 2025! Spaces are limited!
+        </div>
+
+        <div class="form-container">
+            <form onsubmit="handleSubmit(event)">
+
+                <div class="form-group">
+                    <label>Camper's Full Name *</label>
+                    <input type="text" required placeholder="Enter full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Grade (September 2025) *</label>
+                    <select required>
+                        <option value="">Select Grade</option>
+                        <option value="2">2nd Grade</option>
+                        <option value="3">3rd Grade</option>
+                        <option value="4">4th Grade</option>
+                        <option value="5">5th Grade</option>
+                        <option value="6">6th Grade</option>
+                        <option value="7">7th Grade (Bachurei Govoha)</option>
+                        <option value="8">8th Grade (Bachurei Govoha)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date of Birth *</label>
+                    <input type="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Parent/Guardian Name *</label>
+                    <input type="text" required placeholder="Enter parent name">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" required placeholder="(555) 123-4567">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" required placeholder="email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Home Address *</label>
+                    <input type="text" required placeholder="Street Address">
+                </div>
+
+                <div class="form-group">
+                    <label>City *</label>
+                    <input type="text" required placeholder="City">
+                </div>
+
+                <div class="form-group">
+                    <label>Emergency Contact Name *</label>
+                    <input type="text" required placeholder="Emergency contact">
+                </div>
+
+                <div class="form-group">
+                    <label>Emergency Contact Phone *</label>
+                    <input type="tel" required placeholder="Emergency phone">
+                </div>
+
+                <div class="form-group">
+                    <label>Medical Information / Allergies</label>
+                    <textarea rows="4" placeholder="Please list any medical conditions, allergies, or special needs..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Comments</label>
+                    <textarea rows="4" placeholder="Anything else we should know..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    SUBMIT REGISTRATION
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+<!-- ============================= -->
+    <!--             FOOTER            -->
+    <!-- ============================= -->
+
+    <div class="footer">
+        <h3 style="font-size: 2em; margin-bottom: 15px;">Camp Yaldei Govoha</h3>
+        <p>Lakewood, NJ | Phone: 848-226-2996</p>
+        <p>Email: campyg18@gmail.com</p>
+        <p style="margin-top: 20px;">© 2025 Camp Yaldei Govoha. All rights reserved.</p>
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!--            JAVASCRIPT         -->
+    <!-- ============================= -->
+
+    <script>
+
+        /* Switch visible content section */
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+
+            // Smooth scroll to new section
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        /* Registration submit message */
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for registering for Camp Yaldei Govoha! We will contact you shortly.');
+            event.target.reset();
+        }
+
+        // Show ABOUT section by default when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('about');
+        });
+
+    </script>
+
+</body>
+</html>
