@@ -1305,16 +1305,18 @@
 
             document.getElementById(sectionId).classList.add('active');
 
-            if (event && event.target) {
-                event.target.classList.add('active');
-            } else {
-                const targetButton = Array.from(navButtons).find(btn => 
-                    btn.textContent.toLowerCase().includes(sectionId.toLowerCase())
-                );
-                if (targetButton) {
-                    targetButton.classList.add('active');
+            // Find and activate the correct nav button based on section
+            navButtons.forEach(btn => {
+                const btnText = btn.textContent.toLowerCase();
+                if ((sectionId === 'about' && btnText.includes('about')) ||
+                    (sectionId === 'divisions' && btnText.includes('divisions')) ||
+                    (sectionId === 'staff' && btnText.includes('staff')) ||
+                    (sectionId === 'videos' && btnText.includes('videos')) ||
+                    (sectionId === 'resources' && btnText.includes('resources')) ||
+                    (sectionId === 'register' && btnText.includes('register'))) {
+                    btn.classList.add('active');
                 }
-            }
+            });
 
             window.scrollTo({
                 top: 0,
@@ -1322,4 +1324,9 @@
             });
         }
 
-        function 
+        function handleRegistration(event) {
+            event.preventDefault();
+            alert('Thank you for your registration! We will contact you shortly with more information.');
+            event.target.reset();
+        }
+    </script>
