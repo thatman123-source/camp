@@ -55,6 +55,34 @@
             transition: all 0.3s ease;
         }
 
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 0;
+            }
+
+            .nav-container {
+                gap: 8px;
+                padding: 0 10px;
+            }
+
+            .nav-button {
+                padding: 10px 18px;
+                font-size: 0.95em;
+                flex: 0 1 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                gap: 6px;
+            }
+
+            .nav-button {
+                padding: 8px 14px;
+                font-size: 0.85em;
+            }
+        }
+
         .nav-button:hover {
             background: #0984e3;
             color: white;
@@ -719,6 +747,10 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
+            .hero {
+                margin-top: 80px;
+            }
+
             .hero h1 {
                 font-size: 3em;
             }
@@ -738,6 +770,44 @@
             .logo-circle {
                 width: 220px;
                 height: 220px;
+            }
+
+            .staff-card {
+                width: 100% !important;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .division-card {
+                padding: 35px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero-tagline {
+                font-size: 1.2em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1em;
+            }
+
+            .cta-button {
+                padding: 18px 40px;
+                font-size: 1.2em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .logo-circle {
+                width: 180px;
+                height: 180px;
             }
         }
     </style>
